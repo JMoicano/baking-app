@@ -21,7 +21,7 @@
     <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/item_list"
-        android:name="br.com.jmoicano.android.baking_app.ItemListFragment"
+        android:name="br.com.jmoicano.android.bakingapp.ItemListFragment"
         android:layout_width="@dimen/item_width"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
