@@ -9,7 +9,6 @@ import br.com.jmoicano.android.bakingapp.data.ServiceGenerator;
 import br.com.jmoicano.android.bakingapp.data.model.Recipe;
 import br.com.jmoicano.android.bakingapp.service.RecipeService;
 import br.com.jmoicano.android.bakingapp.service.source.RecipeDataSource;
-import br.com.jmoicano.android.bakingapp.service.source.Resource;
 import retrofit2.Call;
 
 public class RecipeRemoteDataSource implements RecipeDataSource {

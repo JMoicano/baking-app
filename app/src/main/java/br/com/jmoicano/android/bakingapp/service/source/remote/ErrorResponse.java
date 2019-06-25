@@ -1,4 +1,4 @@
-package br.com.jmoicano.android.bakingapp.service.source;
+package br.com.jmoicano.android.bakingapp.service.source.remote;
 
 public class ErrorResponse {
     private final int statusCode;

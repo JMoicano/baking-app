@@ -1,4 +1,4 @@
-package br.com.jmoicano.android.bakingapp.service.source;
+package br.com.jmoicano.android.bakingapp.service.source.remote;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

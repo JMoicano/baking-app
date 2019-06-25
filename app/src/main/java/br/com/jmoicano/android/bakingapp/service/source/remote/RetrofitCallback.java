@@ -2,15 +2,12 @@ package br.com.jmoicano.android.bakingapp.service.source.remote;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import br.com.jmoicano.android.bakingapp.service.source.ErrorResponse;
-import br.com.jmoicano.android.bakingapp.service.source.Resource;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
