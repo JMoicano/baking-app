@@ -1,4 +1,4 @@
-package br.com.jmoicano.android.bakingapp;
+package br.com.jmoicano.android.bakingapp.recipeitemlist;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,14 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import br.com.jmoicano.android.bakingapp.recipeitemdetail.ItemDetailActivity;
+import br.com.jmoicano.android.bakingapp.recipeitemdetail.ItemDetailFragment;
+import br.com.jmoicano.android.bakingapp.R;
 import br.com.jmoicano.android.bakingapp.dummy.DummyContent;
 
 import java.util.List;

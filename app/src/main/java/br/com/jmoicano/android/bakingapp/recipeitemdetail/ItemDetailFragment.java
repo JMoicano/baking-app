@@ -1,4 +1,4 @@
-package br.com.jmoicano.android.bakingapp;
+package br.com.jmoicano.android.bakingapp.recipeitemdetail;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import br.com.jmoicano.android.bakingapp.R;
 import br.com.jmoicano.android.bakingapp.dummy.DummyContent;
+import br.com.jmoicano.android.bakingapp.recipeitemlist.ItemListActivity;
 
 /**
  * A fragment representing a single Item detail screen.
