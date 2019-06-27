@@ -23,18 +23,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".recipeitemlist.ItemListActivity"
+            android:name=".steplist.view.ui.StepListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".recipeitemdetail.ItemDetailActivity"
+            android:name=".stepdetail.StepDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".recipeitemlist.ItemListActivity"
+            android:parentActivityName=".steplist.view.ui.StepListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.jmoicano.android.bakingapp.recipeitemlist.ItemListActivity" />
+                android:value=".steplist.view.ui.StepListActivity" />
         </activity>
     </application>
 
