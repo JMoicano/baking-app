@@ -59,7 +59,8 @@ public class RecipeListActivity extends AppCompatActivity {
             public void onRecipeClick(Recipe recipe) {
                 Intent intent = StepListActivity.newInstance(
                         RecipeListActivity.this,
-                        recipe.getSteps()
+                        recipe.getSteps(),
+                        recipe.getIngredients()
                 );
 
                 RecipeListActivity.this.startActivity(intent);

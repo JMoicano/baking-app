@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jmoicano.android.bakingapp.R;
+import br.com.jmoicano.android.bakingapp.data.model.Ingredient;
 import br.com.jmoicano.android.bakingapp.data.model.Step;
+import br.com.jmoicano.android.bakingapp.ingredientsdetail.IngredientsDetailActivity;
+import br.com.jmoicano.android.bakingapp.ingredientsdetail.IngredientsDetailFragment;
 import br.com.jmoicano.android.bakingapp.stepdetail.StepDetailActivity;
 import br.com.jmoicano.android.bakingapp.stepdetail.StepDetailFragment;
 import br.com.jmoicano.android.bakingapp.steplist.view.adapter.StepListAdapter;
@@ -35,9 +39,10 @@ import br.com.jmoicano.android.bakingapp.steplist.viewmodel.StepListViewModelFac
 public class StepListActivity extends AppCompatActivity {
 
 
-    public static Intent newInstance(Context context, List<Step> steps){
+    public static Intent newInstance(Context context, List<Step> steps, List<Ingredient> ingredients){
         Intent intent = new Intent(context, StepListActivity.class);
         intent.putParcelableArrayListExtra(ARG_STEP_LIST, (ArrayList<? extends Parcelable>) steps);
+        intent.putParcelableArrayListExtra(ARG_INGR_LIST, (ArrayList<? extends Parcelable>) ingredients);
         return intent;
     }
 
@@ -50,6 +55,7 @@ public class StepListActivity extends AppCompatActivity {
     private StepListViewModel mViewModel;
 
     public static final String ARG_STEP_LIST = "steps";
+    public static final String ARG_INGR_LIST = "ingredients";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +63,10 @@ public class StepListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_step_list);
 
         ArrayList<Step> steps = getIntent().getParcelableArrayListExtra(ARG_STEP_LIST);
+        ArrayList<Ingredient> ingredients = getIntent().getParcelableArrayListExtra(ARG_INGR_LIST);
         mViewModel = ViewModelProviders.of(
                 this,
-                new StepListViewModelFactory(steps))
+                new StepListViewModelFactory(steps, ingredients))
                 .get(StepListViewModel.class);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -74,9 +81,33 @@ public class StepListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.item_list);
+        TextView textViewIngredients = findViewById(R.id.tv_ingredients);
+        textViewIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StepListActivity stepListActivity = StepListActivity.this;
+                if (mTwoPane) {
+                    Bundle arguments = new Bundle();
+                    arguments.putParcelableArrayList(IngredientsDetailFragment.ARG_ITEM,
+                            (ArrayList<? extends Parcelable>) mViewModel.getIngredients());
+                    IngredientsDetailFragment fragment = new IngredientsDetailFragment();
+                    fragment.setArguments(arguments);
+                    stepListActivity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.item_detail_container, fragment)
+                            .commit();
+                } else {
+                    Intent intent = new Intent(stepListActivity, IngredientsDetailActivity.class);
+                    intent.putExtra(IngredientsDetailFragment.ARG_ITEM,
+                            (ArrayList<? extends Parcelable>) mViewModel.getIngredients());
+
+                    stepListActivity.startActivity(intent);
+                }
+            }
+        });
+
+        RecyclerView recyclerView = findViewById(R.id.item_list);
         assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        setupRecyclerView(recyclerView);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {

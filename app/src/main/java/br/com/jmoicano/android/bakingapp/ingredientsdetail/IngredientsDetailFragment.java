@@ -1,12 +1,12 @@
-package br.com.jmoicano.android.bakingapp.ingredientsdetail.stepdetail;
+package br.com.jmoicano.android.bakingapp.ingredientsdetail;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -15,6 +15,8 @@ import java.util.List;
 
 import br.com.jmoicano.android.bakingapp.R;
 import br.com.jmoicano.android.bakingapp.data.model.Ingredient;
+import br.com.jmoicano.android.bakingapp.databinding.IngredientContentBinding;
+import br.com.jmoicano.android.bakingapp.ingredientsdetail.IngredientsDetailActivity;
 import br.com.jmoicano.android.bakingapp.steplist.view.ui.StepListActivity;
 
 /**
@@ -55,7 +57,7 @@ public class IngredientsDetailFragment extends Fragment {
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-//                appBarLayout.setTitle(mItem.getShortDescription());
+                appBarLayout.setTitle(requireActivity().getString(R.string.ingredients));
             }
         }
     }
@@ -63,13 +65,18 @@ public class IngredientsDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.step_item, container, false);
+        IngredientContentBinding binding = DataBindingUtil.inflate(inflater, R.layout.ingredient_content, container, false);
 
-        // Show the dummy content as text in a TextView.
         if (mItem != null) {
-//            ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.getDescription());
+            for (Ingredient i: mItem) {
+                binding.tvIngredientsDescription.append(
+                        i.getQuantity() + " " +
+                        i.getMeasure() + " " +
+                        i.getIngredientName() + "\n"
+                );
+            }
         }
 
-        return rootView;
+        return binding.getRoot();
     }
 }

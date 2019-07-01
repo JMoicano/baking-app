@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class Ingredient implements Parcelable{
     @SerializedName("quantity")
     @Expose
-    private BigDecimal quantity;
+    private Double quantity;
 
     @SerializedName("measure")
     @Expose
@@ -21,7 +21,7 @@ public class Ingredient implements Parcelable{
     @Expose
     private String ingredientName;
 
-    public Ingredient(BigDecimal quantity, String measure, String ingredientName) {
+    public Ingredient(Double quantity, String measure, String ingredientName) {
         this.quantity = quantity;
         this.measure = measure;
         this.ingredientName = ingredientName;
@@ -29,12 +29,23 @@ public class Ingredient implements Parcelable{
 
 
     protected Ingredient(Parcel in) {
+        if (in.readByte() == 0) {
+            quantity = null;
+        } else {
+            quantity = in.readDouble();
+        }
         measure = in.readString();
         ingredientName = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        if (quantity == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(quantity);
+        }
         dest.writeString(measure);
         dest.writeString(ingredientName);
     }
@@ -56,11 +67,11 @@ public class Ingredient implements Parcelable{
         }
     };
 
-    public BigDecimal getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 

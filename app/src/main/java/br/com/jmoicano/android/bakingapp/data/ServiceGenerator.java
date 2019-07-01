@@ -18,7 +18,6 @@ public class ServiceGenerator {
     }
 
     private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(BigDecimal.class, new BigDecimalSerializer())
             .create();
 
     private static Retrofit.Builder builder = new Retrofit.Builder()
