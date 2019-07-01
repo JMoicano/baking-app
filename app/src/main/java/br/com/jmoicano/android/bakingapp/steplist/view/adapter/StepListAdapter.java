@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import br.com.jmoicano.android.bakingapp.data.model.Step;
 import br.com.jmoicano.android.bakingapp.databinding.StepItemBinding;
-import br.com.jmoicano.android.bakingapp.steplist.viewmodel.StepListAdapterViewModel;
+import br.com.jmoicano.android.bakingapp.util.ListAdapterViewModel;
 
 public abstract class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.StepViewHolder>
         implements StepClickListener {
 
-    private StepListAdapterViewModel mViewModel;
+    private ListAdapterViewModel<Step> mViewModel;
 
-    public StepListAdapter(StepListAdapterViewModel mViewModel) {
+    public StepListAdapter(ListAdapterViewModel<Step> mViewModel) {
         this.mViewModel = mViewModel;
     }
 
@@ -36,7 +36,7 @@ public abstract class StepListAdapter extends RecyclerView.Adapter<StepListAdapt
 
     @Override
     public int getItemCount() {
-        return mViewModel.numSteps();
+        return mViewModel.numItens();
     }
 
     public class StepViewHolder extends RecyclerView.ViewHolder{

@@ -3,6 +3,8 @@ package br.com.jmoicano.android.bakingapp.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.math.BigDecimal;
+
 import br.com.jmoicano.android.bakingapp.BuildConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -16,6 +18,7 @@ public class ServiceGenerator {
     }
 
     private static final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(BigDecimal.class, new BigDecimalSerializer())
             .create();
 
     private static Retrofit.Builder builder = new Retrofit.Builder()

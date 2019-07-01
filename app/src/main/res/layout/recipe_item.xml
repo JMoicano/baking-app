@@ -8,11 +8,16 @@
         <variable
             name="item"
             type="br.com.jmoicano.android.bakingapp.data.model.Recipe" />
+
+        <variable
+            name="onClick"
+            type="br.com.jmoicano.android.bakingapp.recipelist.view.adapter.RecipeClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->onClick.onRecipeClick(item)}"
         app:cardElevation="5dp"
         app:cardCornerRadius="4dp"
         android:layout_margin="10dp">

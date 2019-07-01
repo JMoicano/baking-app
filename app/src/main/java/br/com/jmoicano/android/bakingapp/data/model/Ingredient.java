@@ -6,10 +6,12 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.math.BigDecimal;
+
 public class Ingredient implements Parcelable{
     @SerializedName("quantity")
     @Expose
-    private int quantity;
+    private BigDecimal quantity;
 
     @SerializedName("measure")
     @Expose
@@ -19,16 +21,27 @@ public class Ingredient implements Parcelable{
     @Expose
     private String ingredientName;
 
-    public Ingredient(int quantity, String measure, String ingredientName) {
+    public Ingredient(BigDecimal quantity, String measure, String ingredientName) {
         this.quantity = quantity;
         this.measure = measure;
         this.ingredientName = ingredientName;
     }
 
+
     protected Ingredient(Parcel in) {
-        quantity = in.readInt();
         measure = in.readString();
         ingredientName = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(measure);
+        dest.writeString(ingredientName);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
@@ -43,11 +56,11 @@ public class Ingredient implements Parcelable{
         }
     };
 
-    public int getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 
@@ -67,15 +80,5 @@ public class Ingredient implements Parcelable{
         this.ingredientName = ingredientName;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(quantity);
-        dest.writeString(measure);
-        dest.writeString(ingredientName);
-    }
 }

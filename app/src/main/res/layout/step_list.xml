@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".steplist.view.ui.StepListActivity"
-    tools:listitem="@layout/step_content" />
+    tools:listitem="@layout/step_item" />
