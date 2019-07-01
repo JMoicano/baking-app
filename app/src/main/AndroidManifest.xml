@@ -31,7 +31,7 @@
             android:parentActivityName=".recipelist.view.ui.RecipeListActivity">
         </activity>
         <activity
-            android:name=".stepdetail.StepDetailActivity"
+            android:name=".stepdetail.view.ui.StepDetailActivity"
             android:label="@string/title_item_detail"
             android:parentActivityName=".steplist.view.ui.StepListActivity"
             android:theme="@style/AppTheme.NoActionBar">

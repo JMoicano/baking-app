@@ -1,4 +1,4 @@
-package br.com.jmoicano.android.bakingapp.stepdetail;
+package br.com.jmoicano.android.bakingapp.stepdetail.view.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

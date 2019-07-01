@@ -1,4 +1,4 @@
-package br.com.jmoicano.android.bakingapp.stepdetail;
+package br.com.jmoicano.android.bakingapp.stepdetail.view.ui;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import br.com.jmoicano.android.bakingapp.R;
 import br.com.jmoicano.android.bakingapp.data.model.Step;
 import br.com.jmoicano.android.bakingapp.databinding.StepContentBinding;
+import br.com.jmoicano.android.bakingapp.stepdetail.viewmodel.StepDetailViewModel;
 import br.com.jmoicano.android.bakingapp.steplist.view.ui.StepListActivity;
 
 /**
@@ -45,6 +47,7 @@ public class StepDetailFragment extends Fragment {
     public static final String ARG_ITEM = "item";
 
     private Step mItem;
+    private StepDetailViewModel mViewModel;
 
     private StepContentBinding mBinding;
     private SimpleExoPlayer exoPlayer;
@@ -59,6 +62,8 @@ public class StepDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mViewModel = ViewModelProviders.of(this).get(StepDetailViewModel.class);
 
         assert getArguments() != null;
         if (getArguments().containsKey(ARG_ITEM)) {
@@ -134,5 +139,23 @@ public class StepDetailFragment extends Fragment {
             exoPlayer = null;
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(exoPlayer != null){
+            exoPlayer.seekTo(mViewModel.getVideoPosition());
+            exoPlayer.setPlayWhenReady(true);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(exoPlayer != null){
+            mViewModel.setVideoPosition(exoPlayer.getContentPosition());
+            exoPlayer.setPlayWhenReady(!exoPlayer.getPlayWhenReady());
+        }
     }
 }
