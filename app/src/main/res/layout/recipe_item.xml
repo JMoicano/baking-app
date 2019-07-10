@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <data>
+        <variable
+            name="item"
+            type="br.com.jmoicano.android.bakingapp.data.model.Recipe" />
+
+        <variable
+            name="onClick"
+            type="br.com.jmoicano.android.bakingapp.recipelist.view.adapter.RecipeClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{()->onClick.onRecipeClick(item)}"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="4dp"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/tv_recipe_name"
+            android:text="@{item.name}"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Omelet au fromage"/>
+    </androidx.cardview.widget.CardView>
+</layout>
