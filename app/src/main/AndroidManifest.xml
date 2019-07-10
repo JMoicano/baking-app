@@ -51,7 +51,9 @@
             android:parentActivityName=".steplist.view.ui.StepListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name=".widget.IngredientsRemoteViewsService" />
+        <service
+            android:name=".widget.IngredientsRemoteViewsService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>
