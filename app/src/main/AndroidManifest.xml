@@ -4,6 +4,7 @@
     package="br.com.jmoicano.android.bakingapp">
 
     <dist:module dist:instant="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,6 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".widget.IngredientWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/ingredient_widget_info" />
+        </receiver>
+
         <activity
             android:name=".recipelist.view.ui.RecipeListActivity"
             android:label="@string/title_activity_recipe_list"
@@ -26,20 +37,21 @@
         <activity
             android:name=".steplist.view.ui.StepListActivity"
             android:label="@string/title_activity_step_list"
-            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
-            android:parentActivityName=".recipelist.view.ui.RecipeListActivity">
-        </activity>
+            android:parentActivityName=".recipelist.view.ui.RecipeListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".stepdetail.view.ui.StepDetailActivity"
             android:label="@string/title_item_detail"
             android:parentActivityName=".steplist.view.ui.StepListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".ingredientsdetail.IngredientsDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ingredientsdetail.IngredientsDetailActivity"
             android:label="@string/title_item_detail"
             android:parentActivityName=".steplist.view.ui.StepListActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".widget.IngredientsRemoteViewsService" />
     </application>
 
 </manifest>

@@ -27,6 +27,7 @@ import br.com.jmoicano.android.bakingapp.stepdetail.view.ui.StepDetailFragment;
 import br.com.jmoicano.android.bakingapp.steplist.view.adapter.StepListAdapter;
 import br.com.jmoicano.android.bakingapp.steplist.viewmodel.StepListViewModel;
 import br.com.jmoicano.android.bakingapp.steplist.viewmodel.StepListViewModelFactory;
+import br.com.jmoicano.android.bakingapp.widget.IngredientWidget;
 
 /**
  * An activity representing a list of Items. This activity
@@ -64,6 +65,7 @@ public class StepListActivity extends AppCompatActivity {
 
         ArrayList<Step> steps = getIntent().getParcelableArrayListExtra(ARG_STEP_LIST);
         ArrayList<Ingredient> ingredients = getIntent().getParcelableArrayListExtra(ARG_INGR_LIST);
+        IngredientWidget.sendBroadcast(this, ingredients);
         mViewModel = ViewModelProviders.of(
                 this,
                 new StepListViewModelFactory(steps, ingredients))
