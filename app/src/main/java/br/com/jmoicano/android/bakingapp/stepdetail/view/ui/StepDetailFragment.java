@@ -84,16 +84,6 @@ public class StepDetailFragment extends Fragment {
 
         if (mItem != null) {
             mBinding.setStep(mItem);
-
-            if(mItem.getVideoURL().isEmpty() && mItem.getThumbnailURL().isEmpty()){
-                mBinding.pvVideo.setVisibility(View.GONE);
-            } else if(!mItem.getVideoURL().isEmpty()){
-                mBinding.pvVideo.setVisibility(View.VISIBLE);
-                setupExoPlayer(Uri.parse(mItem.getVideoURL()));
-            } else {
-                mBinding.pvVideo.setVisibility(View.VISIBLE);
-                setupExoPlayer(Uri.parse(mItem.getThumbnailURL()));
-            }
         }
 
         return mBinding.getRoot();
@@ -123,7 +113,7 @@ public class StepDetailFragment extends Fragment {
                             Toast.makeText(
                                     requireContext(),
                                     StepDetailFragment.this.getString(R.string.video_loading_error),
-                                    Toast.LENGTH_SHORT);
+                                    Toast.LENGTH_SHORT).show();
                         }
                     });
             exoPlayer.prepare(mediaSource);
@@ -132,13 +122,27 @@ public class StepDetailFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
+    public void onStart() {
+        super.onStart();
+        if(mItem.getVideoURL().isEmpty() && mItem.getThumbnailURL().isEmpty()){
+            mBinding.pvVideo.setVisibility(View.GONE);
+        } else if(!mItem.getVideoURL().isEmpty()){
+            mBinding.pvVideo.setVisibility(View.VISIBLE);
+            setupExoPlayer(Uri.parse(mItem.getVideoURL()));
+        } else {
+            mBinding.pvVideo.setVisibility(View.VISIBLE);
+            setupExoPlayer(Uri.parse(mItem.getThumbnailURL()));
+        }
+    }
+
+    @Override
+    public void onStop() {
         if(exoPlayer != null){
             exoPlayer.stop();
             exoPlayer.release();
             exoPlayer = null;
         }
-        super.onDestroy();
+        super.onStop();
     }
 
     @Override
